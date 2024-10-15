@@ -11,7 +11,7 @@ class CSV:
         try:
             pd.read_csv(cls.CSV_FILE)
         except FileNotFoundError:
-            df = pd.DataFrame(columns=["date", "amount", "category", "description"])
+            df = pd.DataFrame(columns=cls.COLUMNS)
             df.to_csv(cls.CSV_FILE, index=False)
 
     @classmethod
@@ -22,5 +22,10 @@ class CSV:
             "category": category,
             "description": description,
         }
+        with open(cls.CSV_FILE, "a", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=cls.COLUMNS)
+            writer.writerow(new_entry)
+        print("Entry added successfully")
 
 CSV.initialize_csv()
+CSV.add_entry("10-10-2024", 130.75, "Income", "Salary")
