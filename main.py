@@ -5,6 +5,7 @@ from datetime import datetime
 
 class CSV:
     CSV_FILE = "finance_data.csv"
+    COLUMNS = ["date", "amount", "category", "description"]
 
     @classmethod
     def initialize_csv(cls):
